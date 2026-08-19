@@ -59,15 +59,33 @@ public class AdditionCalculatorApp
         Platform.exit();
     }
 
+    private void handleNum1Field()
+    {
+        resultField.clear();
+
+        if (num2Field.getText().isEmpty())
+            num2Field.requestFocus();
+        else
+            handleAdd();
+    }
+
+    private void handleNum2Field()
+    {
+        resultField.clear();
+
+        if (num1Field.getText().isEmpty())
+            num1Field.requestFocus();
+        else
+            handleAdd();
+    }
+
     private void setupEvents()
     {
         addButton.setOnAction(e -> handleAdd());
         exitButton.setOnAction(e -> handleExit());
 
-        num1Field.setOnAction(e -> {
-            num2Field.requestFocus();
-            resultField.clear();
-        });
+        num1Field.setOnAction(e -> handleNum1Field());
+        num2Field.setOnAction(e -> handleNum2Field());
     }
 
     private void configureControls()
@@ -86,7 +104,6 @@ public class AdditionCalculatorApp
 
         addButton = new Button("Add");
         addButton.setPrefWidth(90);
-        addButton.setDefaultButton(true);
 
         exitButton = new Button("Exit");
         exitButton.setPrefWidth(90);
